@@ -11,6 +11,8 @@ public interface SugestaoService {
 
     List<SugestaoRespostaDto> listarSugestoes(String titulo);
 
+    SugestaoRespostaDto buscarPorId(Long id);
+
 
 
 

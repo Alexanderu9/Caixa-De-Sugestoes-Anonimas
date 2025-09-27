@@ -18,5 +18,10 @@ public interface SugestaoRepository extends  JpaRepository<SugestaoEntity, Long>
 
     List<SugestaoEntity> findByTituloContainingIgnoreCaseOrderByDataAtualizacaoDesc(@Param("titulo") String titulo);
 
+    @Query("SELECT s FROM SugestaoEntity s LEFT JOIN FETCH s.comentarios c " +
+            "WHERE s.id = :id ORDER BY c.dataEnvio DESC")
+
+    SugestaoEntity findByIdWithComentariosOrderByDataEnvioDesc(@Param("id") Long id);
+
 }
 

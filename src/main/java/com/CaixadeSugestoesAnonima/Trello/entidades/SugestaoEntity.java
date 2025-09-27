@@ -32,6 +32,7 @@ public class SugestaoEntity {
     private LocalDate dataAtualizacao;
 
     @OneToMany(mappedBy = "sugestao", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("dataEnvio DESC")
     private List<ComentarioEntity> comentarios;
 
 }

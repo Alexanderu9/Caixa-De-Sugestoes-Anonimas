@@ -32,4 +32,11 @@ public class SugestaoController {
         return sugestaoService.listarSugestoes(titulo);
 
     }
+
+    @GetMapping("/{id}")
+    public SugestaoRespostaDto buscarPorId(@PathVariable Long id) {
+
+        return sugestaoService.buscarPorId(id);
+
+    }
 }

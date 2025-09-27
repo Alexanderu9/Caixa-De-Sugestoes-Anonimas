@@ -8,6 +8,7 @@ import com.CaixadeSugestoesAnonima.Trello.repositorios.SugestaoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,4 +52,16 @@ public class SugestaoServiceImpl implements  SugestaoService{
                 .map(sugestaoMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public SugestaoRespostaDto buscarPorId(Long id) {
+
+        SugestaoEntity entity = sugestaoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sugestão não encontrada com ID: " + id));
+
+        return sugestaoMapper.toDto(entity);
+        
+    }
+
 }
+
