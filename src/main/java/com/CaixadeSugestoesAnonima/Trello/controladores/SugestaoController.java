@@ -1,6 +1,8 @@
 package com.CaixadeSugestoesAnonima.Trello.controladores;
 
 import com.CaixadeSugestoesAnonima.Trello.Services.SugestaoService;
+import com.CaixadeSugestoesAnonima.Trello.dtos.ComentarioRequisicaoDto;
+import com.CaixadeSugestoesAnonima.Trello.dtos.ComentarioRespostaDto;
 import com.CaixadeSugestoesAnonima.Trello.dtos.SugestaoRequisicaoDto;
 import com.CaixadeSugestoesAnonima.Trello.dtos.SugestaoRespostaDto;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +40,12 @@ public class SugestaoController {
 
         return sugestaoService.buscarPorId(id);
 
+    }
+
+    @PostMapping("/{id}/comentarios")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ComentarioRespostaDto adicionarComentario(@PathVariable("id") Long sugestaoId, @RequestBody ComentarioRequisicaoDto dto) {
+
+        return sugestaoService.adicionarComentario(sugestaoId, dto);
     }
 }
