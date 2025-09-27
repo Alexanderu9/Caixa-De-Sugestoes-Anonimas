@@ -8,6 +8,9 @@ import com.CaixadeSugestoesAnonima.Trello.repositorios.SugestaoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 
@@ -27,5 +30,25 @@ public class SugestaoServiceImpl implements  SugestaoService{
 
         return sugestaoMapper.toDto(salva);
 
+    }
+
+    @Override
+    public List<SugestaoRespostaDto> listarSugestoes(String titulo) {
+
+        List<SugestaoEntity> sugestoes;
+
+        if (titulo == null || titulo.isEmpty()) {
+
+            sugestoes = sugestaoRepository.findAllByOrderByDataAtualizacaoDesc();
+
+        } else {
+
+            sugestoes = sugestaoRepository.findByTituloContainingIgnoreCaseOrderByDataAtualizacaoDesc(titulo);
+
+        }
+
+        return sugestoes.stream()
+                .map(sugestaoMapper::toDto)
+                .collect(Collectors.toList());
     }
 }
